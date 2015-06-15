@@ -1,4 +1,9 @@
 if (Meteor.isClient) {
+
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  });
+
   // counter starts at 0
   Session.setDefault('counter', 0);
 

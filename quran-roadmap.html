@@ -10,6 +10,7 @@
       background-color: #eee;
     }
     .tab-content { padding-top: 20px; }
+    .surah h3 { margin: 0; }
   </style>
 </head>
 
@@ -31,6 +32,12 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Notifications</a>
+            <ul class="dropdown-menu" role="menu">
+              <li class="text-muted"><a href="#">No notifications</a></li>
+            </ul>
+          </li>
           <li><a data-toggle="modal" href="#tips">Tips</a></li>
           <li><a href="#">Login</a></li>
         </ul>
@@ -41,7 +48,7 @@
     <div class="first-alert alert alert-info alert-dismissible" role="alert">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       Welcome to the <strong>Quran Road Map</strong>. This app is based on <strong><a href="http://blog.islamiconlineuniversity.com/quran-road-map-ramadan-2015/">Quran Road Map Article</a></strong>.
-      If you haven't read it yet, we suggest to do so before using this app.
+      If you haven't read it yet, we suggest you to do so before using this app.
     </div>
     <!-- /.first-alert -->
     
@@ -50,7 +57,24 @@
 
         <div class="surah panel panel-default">
           <div class="panel-body">
-            <h3>Al-Fathihah: 1-141</h3>
+            <p class="text-muted"><strong>Day 1</strong></p>
+            <h3>Al-Fathihah - Al-Baqarah : <small>1-141</small></h3>
+          </div>
+          <div class="panel-footer meta-surah">
+            <ul class="list-inline">
+              <li><span class="fa fa-users text-muted"></span> <a href="#">13 Quran buddies</a></li>
+              <li><span class="fa fa-bookmark-o text-muted"></span> <a href="#">3 Reflections</a></li>
+              <li><span class="fa fa-diamond text-muted"></span> <a href="#">2 Deeds</a></li>
+              <li class="pull-right"><span><a href="#" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" title="Follow this surah's reflections"><span class="fa fa-bell-o"></span></a></span></li>
+              <li class="pull-right"><span><a href="#" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="left" title="Create new reflection"><span class="fa fa-plus"></span></a></span></li>
+              <li class="clearfix"></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="surah panel panel-default">
+          <div class="panel-body">
+            <h3>Al-Fathihah: <small>1-141</small></h3>
           </div>
           <div class="panel-footer meta-surah">
             <ul class="list-inline">
@@ -61,20 +85,10 @@
         </div>
         <!-- /.surah -->
 
-        <div class="header">
-          <h3>Al-Fathihah: 1-141</h3>
-          <div class="meta-surah">
-            <ul class="list-inline">
-              <li><span class="fa fa-bookmark-o text-muted"></span> 3 reflections</li>
-              <li><span class="fa fa-diamond text-muted"></span> 2 deeds</li>
-            </ul>
-          </div>
-        </div>
-
         <div class="responds row">
 
           <div class="col-sm-8 reflections">
-            <h4 class="page-header">Reflections</h4>
+            <h4>Reflections</h4>
             <div class="panel panel-default reflection">
               <div class="panel-body">
                 <h4>Ishlah <small> on 15 June 2015 <span class="label label-success pull-right">Author</span></small></h4>
@@ -132,7 +146,7 @@
           </div>
           <!-- /.reflections -->
           <div class="col-sm-4 deeds">
-            <h4 class="page-header">Deeds <small><a href="#" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom"><span class="fa fa-info-circle"></span></a></small></h4>
+            <h4>Deeds <small><span class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="The deeds mean to be secret between you and Allah alone. That's why the default state is 'private' for each deed. However, if you really think they will inspire and benefit others. You may change it into public by clicking the eye icon."></span></small></h4>
 
             <form role="form" class="form">
               
@@ -148,6 +162,7 @@
             <ul class="list-group">
               <li class="list-group-item">
                 <ul class="list-inline pull-right">
+                  <li><a href=""><small><span class="fa fa-eye-slash"></span></small></a></li>
                   <li><a href=""><small><span class="fa fa-pencil"></span></small></a></li>
                   <li><a href=""><small><span class="fa fa-trash"></span></small></a></li>
                 </ul>
@@ -174,7 +189,7 @@
     
     <div class="footer">
       <hr>
-      <p class="pull-right">Copyleft &copy; <a href="http://twitter.com/nurulishlah/">@nurulishlah</a>, inspired by <a href="http://blog.islamiconlineuniversity.com/quran-road-map-ramadan-2015/">Quran Road Map IOU</a> | <a href="#about" data-toggle="modal">About</a> • <a href="#feedback" data-toggle="modal">Feedback</a> • <a href="https://github.com/Andrenova/Quran-Roadmap" title="Fork on GitH">GitHub</a></p>
+      <p class="text-center">Copyleft &copy; <a href="http://twitter.com/nurulishlah/">@nurulishlah</a>, inspired by <a href="http://blog.islamiconlineuniversity.com/quran-road-map-ramadan-2015/">Quran Road Map IOU</a> | <a href="#about" data-toggle="modal">About</a> • <a href="#feedback" data-toggle="modal">Feedback</a> • <a href="https://github.com/Andrenova/Quran-Roadmap" title="Fork on GitH">GitHub</a></p>
     </div>
     <!-- /.footer -->
   </div>
