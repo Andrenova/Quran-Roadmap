@@ -47,6 +47,7 @@
     
     <div class="main">
       <div class="wrapper">
+
         <div class="surah panel panel-default">
           <div class="panel-body">
             <h3>Al-Fathihah: 1-141</h3>
@@ -59,6 +60,16 @@
           </div>
         </div>
         <!-- /.surah -->
+
+        <div class="header">
+          <h3>Al-Fathihah: 1-141</h3>
+          <div class="meta-surah">
+            <ul class="list-inline">
+              <li><span class="fa fa-bookmark-o text-muted"></span> 3 reflections</li>
+              <li><span class="fa fa-diamond text-muted"></span> 2 deeds</li>
+            </ul>
+          </div>
+        </div>
 
         <div class="responds row">
 
@@ -106,14 +117,17 @@
               <legend>Post new reflection</legend>
             
               <div class="form-group">
-                <textarea name="" id="input" class="form-control" rows="3" placeholder="Type reflection you might found during reciting this surah..."></textarea>
+                <textarea name="" id="input" class="form-control" rows="4" placeholder="Type reflection you might found during reciting this surah..."></textarea>
+                <span id="helpBlock" class="help-block">You can use <a href="#markdown" data-toggle="modal">Markdown syntax</a> to write your reflections.</span>
               </div>
             
-              
-            
-              <button type="submit" class="btn btn-primary">Submit</button>
-              <button type="submit" class="btn btn-success">Draft</button>
-              <button type="submit" class="btn btn-danger"><span class="fa fa-trash"></span></button>
+              <div class="pull-right">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-success">Draft</button>
+                <button type="submit" class="btn btn-danger"><span class="fa fa-trash"></span></button>
+              </div>
+              <div class="clearfix"></div>
+
             </form>
           </div>
           <!-- /.reflections -->
@@ -204,21 +218,40 @@
   <!-- /#about -->
 
   <div class="modal fade" id="feedback">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Got Feedback?</h4>
-          </div>
-          <div class="modal-body">
-            
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Got Feedback?</h4>
+        </div>
+        <div class="modal-body">
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
+  </div>
+  <!-- /#feedback -->
+
+  <div class="modal fade" id="markdown">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title">Markdown references</h4>
+        </div>
+        <div class="modal-body">
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /#markdown -->
 
 </body>
 
