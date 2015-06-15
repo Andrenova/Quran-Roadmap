@@ -1,14 +1,221 @@
 <head>
-  <title>quran-roadmap</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Quran Roadmap - Track your interaction with Quran</title>
+
+  <style>
+    body {
+      background-color: #eee;
+    }
+    .tab-content { padding-top: 20px; }
+  </style>
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
+  
+  <div class="container">
+    <nav class="navbar navbar-default" role="navigation">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Quran Roadmap</a>
+      </div>
+    
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li><a data-toggle="modal" href="#tips">Tips</a></li>
+          <li><a href="#">Login</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </nav>
+    <!-- /.navbar -->
+    
+    <div class="main">
+      <div class="wrapper">
+        <div class="surah panel panel-default">
+          <div class="panel-body">
+            <h3>Al-Fathihah: 1-141</h3>
+          </div>
+          <div class="panel-footer meta-surah">
+            <ul class="list-inline">
+              <li><span class="fa fa-bookmark-o text-muted"></span> <a href="#">3 reflections</a></li>
+              <li><span class="fa fa-diamond text-muted"></span> <a href="#">2 deeds</a></li>
+            </ul>
+          </div>
+        </div>
+        <!-- /.surah -->
 
-  {{> hello}}
+        <div class="responds row">
+
+          <div class="col-sm-8 reflections">
+            <h4 class="page-header">Reflections</h4>
+            <div class="panel panel-default reflection">
+              <div class="panel-body">
+                <h4>Ishlah <small> on 15 June 2015 <span class="label label-success pull-right">Yours</span></small></h4>
+                <hr>
+                <div class="reflection-content">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut voluptatibus maxime amet illum officiis veritatis ab aspernatur, quidem, est, dolorum eius dicta itaque! Nisi obcaecati nostrum voluptatum quibusdam ratione eum!</p>
+                  <p>Incidunt asperiores voluptatibus eaque non debitis totam sapiente nihil quos aperiam eveniet. Accusamus, quisquam, voluptas? Suscipit sapiente, velit. Minus laborum rem, enim iste dolore odio fuga molestiae delectus vel quisquam.</p>  
+                </div>
+              </div>
+              <div class="panel-footer">
+                <ul class="list-inline">
+                  <li><span class="fa fa-thumbs-o-up"></span> 10</li>
+                  <li><span class="fa fa-thumbs-o-up text-primary"></span> You and 9 others like this reflection.</li>
+                  <li><span class="fa fa-pencil"></span></li>
+                  <li><span class="fa fa-trash"></span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="panel panel-default reflection">
+              <div class="panel-body">
+                <h4>Ishlah <small> on 15 June 2015</small></h4>
+                <hr>
+                <div class="reflection-content">
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut voluptatibus maxime amet illum officiis veritatis ab aspernatur, quidem, est, dolorum eius dicta itaque! Nisi obcaecati nostrum voluptatum quibusdam ratione eum!</p>
+                  <p>Incidunt asperiores voluptatibus eaque non debitis totam sapiente nihil quos aperiam eveniet. Accusamus, quisquam, voluptas? Suscipit sapiente, velit. Minus laborum rem, enim iste dolore odio fuga molestiae delectus vel quisquam.</p>  
+                </div>
+              </div>
+              <div class="panel-footer">
+                <ul class="list-inline">
+                  <li><span class="fa fa-thumbs-o-up"></span> 10</li>
+                  <li><span class="fa fa-thumbs-o-up text-primary"></span> You and 9 others like this reflection.</li>
+                </ul>
+              </div>
+            </div>
+
+            <p class="lead text-center text-muted">No reflections to show, please create one.</p>
+            <!-- /info no reflections text -->
+            
+            <form role="form" id="new-reflection">
+              <legend>Post new reflection</legend>
+            
+              <div class="form-group">
+                <textarea name="" id="input" class="form-control" rows="3" placeholder="Type reflection you might found during reciting this surah..."></textarea>
+              </div>
+            
+              
+            
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" class="btn btn-success">Draft</button>
+              <button type="submit" class="btn btn-danger"><span class="fa fa-trash"></span></button>
+            </form>
+          </div>
+          <!-- /.reflections -->
+          <div class="col-sm-4 deeds">
+            <h4 class="page-header">Deeds <small><a href="#" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom"><span class="fa fa-info-circle"></span></a></small></h4>
+
+            <form role="form" class="form">
+              
+              <div class="input-group">
+                <span class="input-group-addon">
+                  <span class="fa fa-eye-slash text-muted"></span>
+                </span>
+                <input type="text" class="form-control" aria-label="..." placeholder="Add new deed...">
+              </div>  
+              
+            </form>
+            <br>
+            <ul class="list-group">
+              <li class="list-group-item">
+                <ul class="list-inline pull-right">
+                  <li><a href=""><small><span class="fa fa-pencil"></span></small></a></li>
+                  <li><a href=""><small><span class="fa fa-trash"></span></small></a></li>
+                </ul>
+                Item 1
+              </li>
+              <li class="list-group-item">
+                <div class="pull-right"><small><span class="fa fa-thumbs-o-up"></span> 10</small></div>
+                Item 2
+              </li>
+              <li class="list-group-item">
+                <span class="badge">15</span>
+                Item 3
+              </li>
+            </ul>
+            
+            <p class="lead text-center text-muted">No deeds to show, please create one.</p>
+          </div>
+          <!-- /.deeds -->
+        </div>
+        <!-- /.responds -->
+      </div>
+    </div>
+    <!-- /.main -->
+    
+    <div class="footer">
+      <hr>
+      <p class="pull-right">Copyleft &copy; <a href="http://twitter.com/nurulishlah/">@nurulishlah</a>, inspired by <a href="http://blog.islamiconlineuniversity.com/quran-road-map-ramadan-2015/">Quran Road Map IOU</a> | <a href="#about" data-toggle="modal">About</a> • <a href="#feedback" data-toggle="modal">Feedback</a> • <a href="https://github.com/Andrenova/Quran-Roadmap" title="Fork on GitH">GitHub</a></p>
+    </div>
+    <!-- /.footer -->
+  </div>
+
+  <div class="modals">
+    <div class="modal fade" id="tips">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Tips</h4>
+          </div>
+          <div class="modal-body">
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /#tips -->
+
+    <div class="modal fade" id="about">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">About</h4>
+          </div>
+          <div class="modal-body">
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /#about -->
+
+  <div class="modal fade" id="feedback">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Got Feedback?</h4>
+          </div>
+          <div class="modal-body">
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
 </body>
 
 <template name="hello">
-  <button>Click Me</button>
+  <button class="btn btn-default">Click Me</button>
   <p>You've pressed the button {{counter}} times.</p>
 </template>
