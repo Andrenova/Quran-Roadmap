@@ -26,6 +26,11 @@ if (Meteor.isClient) {
     $('[data-toggle="tooltip"]').tooltip()
   });
 
+  // Accounts helpers
+  Accounts.ui.config({
+    passwordSignupFields: 'USERNAME_AND_EMAIL'
+  });
+
   // surah list helper
   Template.surahList.helpers({
     surahs: function () {
