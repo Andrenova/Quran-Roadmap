@@ -10,3 +10,4 @@ twbs:bootstrap
 fortawesome:fontawesome
 markdown
 iron:router
+sacha:spin

@@ -3,7 +3,9 @@ Surahs = new Mongo.Collection('surahs');
 
 // Router
 Router.configure({
-  layoutTemplate: 'layout'
+  layoutTemplate: 'layout',
+  loadingTemplate: 'loading',
+  waitOn: function() { return Meteor.subscribe('surahs'); }
 });
 
 Router.route('/', { name: 'surahList' });
