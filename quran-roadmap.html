@@ -16,54 +16,6 @@
 </head>
 
 <body>
-  
-  <div class="container">
-    <nav class="navbar navbar-default" role="navigation">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">Quran Roadmap</a>
-      </div>
-    
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse navbar-ex1-collapse">
-        <ul class="nav navbar-nav navbar-right">
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Notifications</a>
-            <ul class="dropdown-menu" role="menu">
-              <li class="text-muted"><a href="#">No notifications</a></li>
-            </ul>
-          </li>
-          <li><a data-toggle="modal" href="#tips">Tips</a></li>
-          <li><a href="#">Login</a></li>
-        </ul>
-      </div><!-- /.navbar-collapse -->
-    </nav>
-    <!-- /.navbar -->
-
-    <div class="first-alert alert alert-info alert-dismissible" role="alert">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      Welcome to the <strong>Quran Road Map</strong>. This app is based on <strong><a href="http://blog.islamiconlineuniversity.com/quran-road-map-ramadan-2015/">Quran Road Map Article</a></strong>.
-      If you haven't read it yet, we suggest you to do so before using this app.
-    </div>
-    <!-- /.first-alert -->
-    
-    <div class="main">
-      {{> surahList}}
-    </div>
-    <!-- /.main -->
-    
-    <div class="footer">
-      <hr>
-      <p class="text-center">Copyleft &copy; <a href="http://twitter.com/nurulishlah/">@nurulishlah</a>, inspired by <a href="http://blog.islamiconlineuniversity.com/quran-road-map-ramadan-2015/">Quran Road Map IOU</a> | <a href="#about" data-toggle="modal">About</a> • <a href="#feedback" data-toggle="modal">Feedback</a> • <a href="https://github.com/Andrenova/Quran-Roadmap" title="Fork on GitH">GitHub</a></p>
-    </div>
-    <!-- /.footer -->
-  </div>
 
   <div class="modals">
     <div class="modal fade" id="tips">
@@ -177,6 +129,58 @@
   </script>
 
 </body>
+
+<template name="layout">
+
+  <div class="container">
+    <nav class="navbar navbar-default" role="navigation">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="{{pathFor 'surahList'}}">Quran Roadmap</a>
+      </div>
+    
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Notifications</a>
+            <ul class="dropdown-menu" role="menu">
+              <li class="text-muted"><a href="#">No notifications</a></li>
+            </ul>
+          </li>
+          <li><a data-toggle="modal" href="#tips">Tips</a></li>
+          <li><a href="#">Login</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </nav>
+    <!-- /.navbar -->
+
+    <div class="first-alert alert alert-info alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      Welcome to the <strong>Quran Road Map</strong>. This app is based on <strong><a href="http://blog.islamiconlineuniversity.com/quran-road-map-ramadan-2015/">Quran Road Map Article</a></strong>.
+      If you haven't read it yet, we suggest you to do so before using this app.
+    </div>
+    <!-- /.first-alert -->
+    
+    <div class="main">
+      {{> yield}}
+    </div>
+    <!-- /.main -->
+    
+    <div class="footer">
+      <hr>
+      <p class="text-center">Copyleft &copy; <a href="http://twitter.com/nurulishlah/">@nurulishlah</a>, inspired by <a href="http://blog.islamiconlineuniversity.com/quran-road-map-ramadan-2015/">Quran Road Map IOU</a> | <a href="#about" data-toggle="modal">About</a> • <a href="#feedback" data-toggle="modal">Feedback</a> • <a href="https://github.com/Andrenova/Quran-Roadmap" title="Fork on GitH">GitHub</a></p>
+    </div>
+    <!-- /.footer -->
+  </div>
+  
+</template>
 
 <!-- surahList template -->
 <template name="surahList">

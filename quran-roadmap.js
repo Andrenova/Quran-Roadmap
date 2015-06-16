@@ -1,6 +1,13 @@
 // Surah collection
 Surahs = new Mongo.Collection('surahs');
 
+// Router
+Router.configure({
+  layoutTemplate: 'layout'
+});
+
+Router.route('/', { name: 'surahList' });
+
 if (Meteor.isClient) {
 
   // Subscribe to surahs collection
