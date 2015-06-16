@@ -56,6 +56,25 @@
     <div class="main">
       <div class="wrapper">
 
+        {{#each surahs}}
+        <div class="surah panel panel-default">
+          <div class="panel-body">
+            <p class="text-muted"><strong>Day {{day}}</strong></p>
+            <h3>{{title}} : <small>{{ayah}}</small></h3>
+          </div>
+          <div class="panel-footer meta-surah">
+            <ul class="list-inline">
+              <li><span class="fa fa-users text-muted"></span> <a href="#">13 Quran buddies</a></li>
+              <li><span class="fa fa-bookmark-o text-muted"></span> <a href="#">3 Reflections</a></li>
+              <li><span class="fa fa-diamond text-muted"></span> <a href="#">2 Deeds</a></li>
+              <li class="pull-right"><span><a href="#" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" title="Follow this surah's reflections"><span class="fa fa-bell-o"></span></a></span></li>
+              <li class="pull-right"><span><a href="#" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="left" title="Create new reflection"><span class="fa fa-plus"></span></a></span></li>
+              <li class="clearfix"></li>
+            </ul>
+          </div>
+        </div>
+        {{/each}}
+
         <div class="surah panel panel-default">
           <div class="panel-body">
             <p class="text-muted"><strong>Day 1</strong></p>
