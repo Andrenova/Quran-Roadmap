@@ -1,5 +1,6 @@
-// Surah collection
+// Collections
 Surahs = new Mongo.Collection('surahs');
+Reflections = new Mongo.Collection('reflections');
 
 // Router
 Router.configure({
@@ -36,6 +37,40 @@ if (Meteor.isClient) {
     surahs: function () {
       // return array of surah
       return Surahs.find();
+    }
+  });
+
+  Template.surahPage.helpers({
+    reflections: function () {
+      // ...
+      return Reflections.find();
+    }
+  });
+
+  // submit a reflection
+  Template.reflectionSubmit.events({
+    'submit form.new-reflection': function (e, template) {
+      // ...
+      
+      e.preventDefault();
+
+      var user = Meteor.user();
+      var surah = template.data._id;
+      var reflection = $(e.target).find('[name=reflection-content]').val();
+
+      Reflections.insert({
+        surahId : surah,
+        body : reflection,
+        userId : user._id,
+        author: user.username,
+        submitted: new Date()
+      });
+      
+
+      console.log(user._id + " " + reflection + " " + surah);
+      
+      $(e.target).find('[name=reflection-content]').val("");
+
     }
   });
 }

@@ -189,13 +189,11 @@
 
 <!-- surahList template -->
 <template name="surahList">
-  
   <div class="surahs">
     {{#each surahs}}
       {{>surahItem}}
     {{/each}}
   </div>
-  
 </template>
 
 <!-- surahItem template -->
@@ -226,60 +224,20 @@
   <div class="responds row">
     <div class="col-sm-8 reflections">
       <h4>Reflections</h4>
-      <div class="panel panel-default reflection">
-        <div class="panel-body">
-          <h4>Ishlah <small> on 15 June 2015 <span class="label label-success pull-right">Author</span></small></h4>
-          <hr>
-          <div class="reflection-content">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut voluptatibus maxime amet illum officiis veritatis ab aspernatur, quidem, est, dolorum eius dicta itaque! Nisi obcaecati nostrum voluptatum quibusdam ratione eum!</p>
-            <p>Incidunt asperiores voluptatibus eaque non debitis totam sapiente nihil quos aperiam eveniet. Accusamus, quisquam, voluptas? Suscipit sapiente, velit. Minus laborum rem, enim iste dolore odio fuga molestiae delectus vel quisquam.</p>  
-          </div>
-        </div>
-        <div class="panel-footer">
-          <ul class="list-inline">
-            <li><span class="fa fa-thumbs-o-up"></span> 10</li>
-            <li><span class="fa fa-thumbs-o-up text-primary"></span> You and 9 others like this reflection.</li>
-            <li><span class="fa fa-pencil"></span></li>
-            <li><span class="fa fa-trash"></span></li>
-          </ul>
-        </div>
-      </div>
-      <div class="panel panel-default reflection">
-        <div class="panel-body">
-          <h4>Ishlah <small> on 15 June 2015</small></h4>
-          <hr>
-          <div class="reflection-content">
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut voluptatibus maxime amet illum officiis veritatis ab aspernatur, quidem, est, dolorum eius dicta itaque! Nisi obcaecati nostrum voluptatum quibusdam ratione eum!</p>
-            <p>Incidunt asperiores voluptatibus eaque non debitis totam sapiente nihil quos aperiam eveniet. Accusamus, quisquam, voluptas? Suscipit sapiente, velit. Minus laborum rem, enim iste dolore odio fuga molestiae delectus vel quisquam.</p>  
-          </div>
-        </div>
-        <div class="panel-footer">
-          <ul class="list-inline">
-            <li><span class="fa fa-thumbs-o-up"></span> 10</li>
-            <li><span class="fa fa-thumbs-o-up text-primary"></span> You and 9 others like this reflection.</li>
-          </ul>
-        </div>
-      </div>
+      <!-- {{>reflectionsList}} -->
+      {{#each reflections}}
+        {{>reflectionItem}}
+      {{/each}}
 
       <p class="lead text-center text-muted">No reflections to show, please create one.</p>
       <!-- /info no reflections text -->
-      
-      <form role="form" id="new-reflection">
-        <legend>Post new reflection</legend>
-      
-        <div class="form-group">
-          <textarea name="" id="input" class="form-control" rows="4" placeholder="Type reflection you might found during reciting this surah..."></textarea>
-          <span id="helpBlock" class="help-block">You can use <a href="#markdown" data-toggle="modal">Markdown syntax</a> to write your reflections.</span>
-        </div>
-      
-        <div class="pull-right">
-          <button type="submit" class="btn btn-primary">Submit</button>
-          <button type="submit" class="btn btn-success">Draft</button>
-          <button type="submit" class="btn btn-danger"><span class="fa fa-trash"></span></button>
-        </div>
-        <div class="clearfix"></div>
 
-      </form>
+      {{#if currentUser}}
+        {{>reflectionSubmit}}
+      {{else}}  
+        <p class="lead text-center text-muted">Please login to submit a reflection.</p>
+      {{/if}}
+      
     </div>
     <!-- /.reflections -->
     <div class="col-sm-4 deeds">
@@ -321,6 +279,60 @@
   </div>
   <!-- /.responds -->
 
+</template>
+
+<!-- submit reflection form -->
+<template name="reflectionSubmit">
+  <form role="form" class="new-reflection">
+    <legend>Post new reflection</legend>
+  
+    <div class="form-group">
+      <textarea name="reflection-content" id="input" class="form-control" rows="4" placeholder="Type reflection you might found during reciting this surah..."></textarea>
+      <span id="helpBlock" class="help-block">You can use <a href="#markdown" data-toggle="modal">Markdown syntax</a> to write your reflections.</span>
+    </div>
+  
+    <div class="pull-right">
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="button" class="btn btn-danger"><span class="fa fa-trash"></span></button>
+    </div>
+    <div class="clearfix"></div>
+  </form>
+</template>
+
+<!-- reflections list template -->
+<!-- <template name="reflectionsList">
+  {{#each reflections}}
+    {{>reflectionItem}}
+  {{/each}}
+
+    {{>reflectionItem}}
+  
+</template> -->
+
+<!-- reflection item template -->
+<template name="reflectionItem">
+  <div class="panel panel-default reflection">
+    <div class="panel-body">
+      <h4>Ishlah <small> on 15 June 2015 <span class="label label-success pull-right">Author</span></small></h4>
+      <hr>
+      <div class="reflection-content">
+      
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut voluptatibus maxime amet illum officiis veritatis ab aspernatur, quidem, est, dolorum eius dicta itaque! Nisi obcaecati nostrum voluptatum quibusdam ratione eum!</p>
+        <p>Incidunt asperiores voluptatibus eaque non debitis totam sapiente nihil quos aperiam eveniet. Accusamus, quisquam, voluptas? Suscipit sapiente, velit. Minus laborum rem, enim iste dolore odio fuga molestiae delectus vel quisquam.</p>  
+
+        This one using __markdown__.
+      
+      </div>
+    </div>
+    <div class="panel-footer">
+      <ul class="list-inline">
+        <li><span class="fa fa-thumbs-o-up"></span> 10</li>
+        <li><span class="fa fa-thumbs-o-up text-primary"></span> You and 9 others like this reflection.</li>
+        <li><span class="fa fa-pencil"></span></li>
+        <li><span class="fa fa-trash"></span></li>
+      </ul>
+    </div>
+  </div>
 </template>
 
 <!-- 404 template -->
