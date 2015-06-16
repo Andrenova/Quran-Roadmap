@@ -5,6 +5,7 @@ Surahs = new Mongo.Collection('surahs');
 Router.configure({
   layoutTemplate: 'layout',
   loadingTemplate: 'loading',
+  notFoundTemplate: 'notFound',
   waitOn: function() { return Meteor.subscribe('surahs'); }
 });
 
@@ -13,6 +14,7 @@ Router.route('/surah/:_id', {
   name: 'surahPage',
   data: function() { return Surahs.findOne(this.params._id); }
 });
+Router.onBeforeAction('dataNotFound', {only: 'postPage'});
 
 if (Meteor.isClient) {
 
