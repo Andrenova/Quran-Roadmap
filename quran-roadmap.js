@@ -1,6 +1,10 @@
+// Surah collection
 Surahs = new Mongo.Collection('surahs');
 
 if (Meteor.isClient) {
+
+  // Subscribe to surahs collection
+  Meteor.subscribe('surahs');
 
   // hook Bootstrap tooltip function
   $(function () {
@@ -203,6 +207,10 @@ if (Meteor.isServer) {
       });
     }
 
-  
+  });
+
+  // Publis surahs
+  Meteor.publish('surahs', function() {
+    return Surahs.find();
   });
 }
