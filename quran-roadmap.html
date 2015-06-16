@@ -188,123 +188,130 @@
   
   <div class="surahs">
     {{#each surahs}}
-    <div class="surah panel panel-default">
-      <div class="panel-body">
-        <p class="text-muted"><strong>Day {{day}}</strong></p>
-        <h3>{{title}} : <small>{{ayah}}</small></h3>
-      </div>
-      <div class="panel-footer meta-surah">
-        <ul class="list-inline">
-          <li><span class="fa fa-users text-muted"></span> <a href="#">13 Quran buddies</a></li>
-          <li><span class="fa fa-bookmark-o text-muted"></span> <a href="#">3 Reflections</a></li>
-          <li><span class="fa fa-diamond text-muted"></span> <a href="#">2 Deeds</a></li>
-          <li class="pull-right"><span><a href="#" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" title="Follow this surah's reflections"><span class="fa fa-bell-o"></span></a></span></li>
-          <li class="pull-right"><span><a href="#" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="left" title="Create new reflection"><span class="fa fa-plus"></span></a></span></li>
-          <li class="clearfix"></li>
-        </ul>
-      </div>
-    </div>
+      {{>surahItem}}
     {{/each}}
   </div>
   
 </template>
 
-<!-- singleSurah page template -->
+<!-- surahItem template -->
 <template name="surahItem">
+  <div class="surah panel panel-default">
+    <div class="panel-body">
+      <p class="text-muted"><strong>Day {{day}}</strong></p>
+      <h3><a href="{{pathFor 'surahPage'}}">{{title}}</a> : <small>{{ayah}}</small></h3>
+    </div>
+    <div class="panel-footer meta-surah">
+      <ul class="list-inline">
+        <li><span class="fa fa-users text-muted"></span> <a href="#">13 Quran buddies</a></li>
+        <li><span class="fa fa-bookmark-o text-muted"></span> <a href="#">3 Reflections</a></li>
+        <li><span class="fa fa-diamond text-muted"></span> <a href="#">2 Deeds</a></li>
+        <li class="pull-right"><span><a href="#" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" title="Follow this surah's reflections"><span class="fa fa-bell-o"></span></a></span></li>
+        <li class="pull-right"><span><a href="#" class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="left" title="Create new reflection"><span class="fa fa-plus"></span></a></span></li>
+        <li class="clearfix"></li>
+      </ul>
+    </div>
+  </div>
+</template>
+
+<!-- singleSurah page template -->
+<template name="surahPage">
+
+  {{>surahItem}}
   
   <div class="responds row">
     <div class="col-sm-8 reflections">
-            <h4>Reflections</h4>
-            <div class="panel panel-default reflection">
-              <div class="panel-body">
-                <h4>Ishlah <small> on 15 June 2015 <span class="label label-success pull-right">Author</span></small></h4>
-                <hr>
-                <div class="reflection-content">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut voluptatibus maxime amet illum officiis veritatis ab aspernatur, quidem, est, dolorum eius dicta itaque! Nisi obcaecati nostrum voluptatum quibusdam ratione eum!</p>
-                  <p>Incidunt asperiores voluptatibus eaque non debitis totam sapiente nihil quos aperiam eveniet. Accusamus, quisquam, voluptas? Suscipit sapiente, velit. Minus laborum rem, enim iste dolore odio fuga molestiae delectus vel quisquam.</p>  
-                </div>
-              </div>
-              <div class="panel-footer">
-                <ul class="list-inline">
-                  <li><span class="fa fa-thumbs-o-up"></span> 10</li>
-                  <li><span class="fa fa-thumbs-o-up text-primary"></span> You and 9 others like this reflection.</li>
-                  <li><span class="fa fa-pencil"></span></li>
-                  <li><span class="fa fa-trash"></span></li>
-                </ul>
-              </div>
-            </div>
-            <div class="panel panel-default reflection">
-              <div class="panel-body">
-                <h4>Ishlah <small> on 15 June 2015</small></h4>
-                <hr>
-                <div class="reflection-content">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut voluptatibus maxime amet illum officiis veritatis ab aspernatur, quidem, est, dolorum eius dicta itaque! Nisi obcaecati nostrum voluptatum quibusdam ratione eum!</p>
-                  <p>Incidunt asperiores voluptatibus eaque non debitis totam sapiente nihil quos aperiam eveniet. Accusamus, quisquam, voluptas? Suscipit sapiente, velit. Minus laborum rem, enim iste dolore odio fuga molestiae delectus vel quisquam.</p>  
-                </div>
-              </div>
-              <div class="panel-footer">
-                <ul class="list-inline">
-                  <li><span class="fa fa-thumbs-o-up"></span> 10</li>
-                  <li><span class="fa fa-thumbs-o-up text-primary"></span> You and 9 others like this reflection.</li>
-                </ul>
-              </div>
-            </div>
+      <h4>Reflections</h4>
+      <div class="panel panel-default reflection">
+        <div class="panel-body">
+          <h4>Ishlah <small> on 15 June 2015 <span class="label label-success pull-right">Author</span></small></h4>
+          <hr>
+          <div class="reflection-content">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut voluptatibus maxime amet illum officiis veritatis ab aspernatur, quidem, est, dolorum eius dicta itaque! Nisi obcaecati nostrum voluptatum quibusdam ratione eum!</p>
+            <p>Incidunt asperiores voluptatibus eaque non debitis totam sapiente nihil quos aperiam eveniet. Accusamus, quisquam, voluptas? Suscipit sapiente, velit. Minus laborum rem, enim iste dolore odio fuga molestiae delectus vel quisquam.</p>  
+          </div>
+        </div>
+        <div class="panel-footer">
+          <ul class="list-inline">
+            <li><span class="fa fa-thumbs-o-up"></span> 10</li>
+            <li><span class="fa fa-thumbs-o-up text-primary"></span> You and 9 others like this reflection.</li>
+            <li><span class="fa fa-pencil"></span></li>
+            <li><span class="fa fa-trash"></span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="panel panel-default reflection">
+        <div class="panel-body">
+          <h4>Ishlah <small> on 15 June 2015</small></h4>
+          <hr>
+          <div class="reflection-content">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut voluptatibus maxime amet illum officiis veritatis ab aspernatur, quidem, est, dolorum eius dicta itaque! Nisi obcaecati nostrum voluptatum quibusdam ratione eum!</p>
+            <p>Incidunt asperiores voluptatibus eaque non debitis totam sapiente nihil quos aperiam eveniet. Accusamus, quisquam, voluptas? Suscipit sapiente, velit. Minus laborum rem, enim iste dolore odio fuga molestiae delectus vel quisquam.</p>  
+          </div>
+        </div>
+        <div class="panel-footer">
+          <ul class="list-inline">
+            <li><span class="fa fa-thumbs-o-up"></span> 10</li>
+            <li><span class="fa fa-thumbs-o-up text-primary"></span> You and 9 others like this reflection.</li>
+          </ul>
+        </div>
+      </div>
 
-            <p class="lead text-center text-muted">No reflections to show, please create one.</p>
-            <!-- /info no reflections text -->
-            
-            <form role="form" id="new-reflection">
-              <legend>Post new reflection</legend>
-            
-              <div class="form-group">
-                <textarea name="" id="input" class="form-control" rows="4" placeholder="Type reflection you might found during reciting this surah..."></textarea>
-                <span id="helpBlock" class="help-block">You can use <a href="#markdown" data-toggle="modal">Markdown syntax</a> to write your reflections.</span>
-              </div>
-            
-              <div class="pull-right">
-                <button type="submit" class="btn btn-primary">Submit</button>
-                <button type="submit" class="btn btn-success">Draft</button>
-                <button type="submit" class="btn btn-danger"><span class="fa fa-trash"></span></button>
-              </div>
-              <div class="clearfix"></div>
+      <p class="lead text-center text-muted">No reflections to show, please create one.</p>
+      <!-- /info no reflections text -->
+      
+      <form role="form" id="new-reflection">
+        <legend>Post new reflection</legend>
+      
+        <div class="form-group">
+          <textarea name="" id="input" class="form-control" rows="4" placeholder="Type reflection you might found during reciting this surah..."></textarea>
+          <span id="helpBlock" class="help-block">You can use <a href="#markdown" data-toggle="modal">Markdown syntax</a> to write your reflections.</span>
+        </div>
+      
+        <div class="pull-right">
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn btn-success">Draft</button>
+          <button type="submit" class="btn btn-danger"><span class="fa fa-trash"></span></button>
+        </div>
+        <div class="clearfix"></div>
 
-            </form>
+      </form>
     </div>
     <!-- /.reflections -->
     <div class="col-sm-4 deeds">
-            <h4>Deeds <small><span class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="Deeds from today's portion which you can act upon. These deeds mean to be secret between you and Allah alone. That's why the default state is 'private' for each deed. However, if you really think they will inspire and benefit others. You may change it into public by clicking the eye icon."></span></small></h4>
+      <h4>Deeds <small><span class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="Deeds from today's portion which you can act upon. These deeds mean to be secret between you and Allah alone. That's why the default state is 'private' for each deed. However, if you really think they will inspire and benefit others. You may change it into public by clicking the eye icon."></span></small></h4>
 
-            <form role="form" class="form">
-              
-              <div class="input-group">
-                <span class="input-group-addon">
-                  <span class="fa fa-eye-slash text-muted"></span>
-                </span>
-                <input type="text" class="form-control" aria-label="..." placeholder="Add new deed...">
-              </div>  
-              
-            </form>
-            <br>
-            <ul class="list-group">
-              <li class="list-group-item">
-                <ul class="list-inline pull-right">
-                  <li><a href=""><small><span class="fa fa-eye-slash"></span></small></a></li>
-                  <li><a href=""><small><span class="fa fa-pencil"></span></small></a></li>
-                  <li><a href=""><small><span class="fa fa-trash"></span></small></a></li>
-                </ul>
-                Item 1
-              </li>
-              <li class="list-group-item">
-                <div class="pull-right"><small><span class="fa fa-thumbs-o-up"></span> 10</small></div>
-                Item 2
-              </li>
-              <li class="list-group-item">
-                <span class="badge">15</span>
-                Item 3
-              </li>
-            </ul>
-            
-            <p class="lead text-center text-muted">No deeds to show, please create one.</p>
+      <form role="form" class="form">
+        
+        <div class="input-group">
+          <span class="input-group-addon">
+            <span class="fa fa-eye-slash text-muted"></span>
+          </span>
+          <input type="text" class="form-control" aria-label="..." placeholder="Add new deed...">
+        </div>  
+        
+      </form>
+      <br>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <ul class="list-inline pull-right">
+            <li><a href=""><small><span class="fa fa-eye-slash"></span></small></a></li>
+            <li><a href=""><small><span class="fa fa-pencil"></span></small></a></li>
+            <li><a href=""><small><span class="fa fa-trash"></span></small></a></li>
+          </ul>
+          Item 1
+        </li>
+        <li class="list-group-item">
+          <div class="pull-right"><small><span class="fa fa-thumbs-o-up"></span> 10</small></div>
+          Item 2
+        </li>
+        <li class="list-group-item">
+          <span class="badge">15</span>
+          Item 3
+        </li>
+      </ul>
+      
+      <p class="lead text-center text-muted">No deeds to show, please create one.</p>
     </div>
     <!-- /.deeds -->
   </div>

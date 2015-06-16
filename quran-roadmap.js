@@ -9,6 +9,10 @@ Router.configure({
 });
 
 Router.route('/', { name: 'surahList' });
+Router.route('/surah/:_id', {
+  name: 'surahPage',
+  data: function() { return Surahs.findOne(this.params._id); }
+});
 
 if (Meteor.isClient) {
 
