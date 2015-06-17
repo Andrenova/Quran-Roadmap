@@ -77,8 +77,8 @@ if (Meteor.isClient) {
       var content = $(e.target).find('[name=content]').val();
       var surahId = this._id;
 
-      // create new deed by calling addNewDeed function
-      Meteor.call('addNewDeed', content, surahId);
+      // create new deed by calling createNewDeed function
+      Meteor.call('createNewDeed', content, surahId);
 
       // clear the text form field
       $(e.target).find('[name=content]').val("");
@@ -105,22 +105,13 @@ if (Meteor.isClient) {
       
       e.preventDefault();
 
-      var user = Meteor.user();
       var surah = template.data._id;
-      var $reflection = $(e.target).find('[name=reflection-content]');
+      var reflection = $(e.target).find('[name=reflection-content]').val();
 
-      Reflections.insert({
-        surahId : surah,
-        body : $reflection.val(),
-        userId : user._id,
-        author: user.username,
-        submitted: new Date()
-      });
+      // create new reflection
+      Meteor.call('createNewReflection', surah, reflection);
       
-
-      console.log(user.username + " " + $reflection.val() + " " + template.data.title);
-      
-      $reflection.val("");
+      $(e.target).find('[name=reflection-content]').val("");
 
     }
   });
@@ -133,39 +124,10 @@ if (Meteor.isServer) {
 
     if (Surahs.find().count() === 0) {
 
-      // fake quran buddies:
-      var saadId = Meteor.users.insert({
-        profile: {name: "Muhamad Saad"}
-      });
-      var saad = Meteor.users.findOne(saadId)
-
-      var medriaId = Meteor.users.insert({
-        profile: {name: "Medria Hardhienata"}
-      });
-      var medria = Meteor.users.findOne(medriaId)
-
-      var firstId = Surahs.insert({
+      Surahs.insert({
         day: 1,
         title: 'Al Fatiha - Al Baqarah',
         ayah: '1:1 - 2:141'
-      });
-
-      Deeds.insert({
-        surahId: firstId,
-        userId: saad._id,
-        author: saad.profile.name,
-        submitted: new Date(),
-        content: 'Observing prayer deeper',
-        isPrivate: true,
-      });
-
-      Deeds.insert({
-        surahId: firstId,
-        userId: medria._id,
-        author: medria.profile.name,
-        submitted: new Date(),
-        content: 'Go to Mecca for doing Hajj, insyaAllah',
-        isPrivate: false,
       });
 
       Surahs.insert({
@@ -357,7 +319,7 @@ if (Meteor.isServer) {
   });
 
   Meteor.methods({
-    addNewDeed: function (content, surahId) {
+    createNewDeed: function (content, surahId) {
       // get current user
       var currentUserId = Meteor.userId();
 
@@ -367,8 +329,27 @@ if (Meteor.isServer) {
         userId: currentUserId,
         submitted: new Date(),
         content: content,
-        isPrivate: true
+        isPrivate: true,
+        liked: 0
       });
+    },
+    createNewReflection: function (surah, reflection) {
+      // get current user
+      var currentUserId = Meteor.user();
+
+      console.log(currentUserId.username);
+
+      // create new reflection
+      Reflections.insert({
+        surahId : surah,
+        userId : currentUserId._id,
+        author: currentUserId.username,
+        submitted: new Date(),
+        body : reflection,
+        isPrivate: true,
+        liked: 0
+      });
+
     }
   });
 }
