@@ -343,7 +343,21 @@
 <template name="reflectionItem">
   <div class="panel panel-default reflection">
     <div class="panel-body">
-      <h4>{{author}} <small>• {{submittedText}} <span class="label label-success pull-right">Author</span></small></h4>
+      <h4>{{author}} 
+        <small>• {{submittedText}}
+        {{#if isOwner}}
+          <span class="pull-right">
+            <button class="btn btn-sm btn-success toggle-private">
+              {{#if isPublic}}
+                Make this private
+              {{else}}
+                Make this public
+              {{/if}}
+            </button>
+          </span>
+        {{/if}}
+        </small>
+      </h4>
       <hr>
       <div class="reflection-content">
       {{#markdown}}{{body}}{{/markdown}}
@@ -353,8 +367,10 @@
       <ul class="list-inline">
         <li><span class="fa fa-thumbs-o-up"></span> 10</li>
         <!-- <li><span class="fa fa-thumbs-o-up text-primary"></span> You and 9 others like this reflection.</li> -->
-        <li><span class="fa fa-pencil"></span></li>
-        <li><span class="fa fa-trash remove-reflection"></span></li>
+        {{#if isOwner}}
+          <li><span class="fa fa-pencil"></span></li>
+          <li><span class="fa fa-trash remove-reflection"></span></li>
+        {{/if}}
       </ul>
     </div>
   </div>
