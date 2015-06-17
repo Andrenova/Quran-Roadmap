@@ -255,7 +255,8 @@
 
 <!-- deedItem template -->
 <template name="deedItem">
-  <li class="list-group-item">
+  <!-- pending for later -->
+  <!-- <li class="list-group-item">
     <form class="form edit-deed">
       <div class="input-group input-group-sm">
         <input type="text" name="edited-content" class="form-control" aria-label="..." value="{{content}}">
@@ -264,12 +265,17 @@
         </span>
       </div>
     </form>
-  </li>
+  </li> -->
   <li class="list-group-item">
     {{#if isOwner}}
     <ul class="list-inline pull-right">
-      <li class="toggle-private"><small><span class="fa fa-eye"></span></small></li>
-      <li class="edit-deed"><small><span class="fa fa-pencil"></span></small></li>
+      {{#if isPrivate}}
+
+        <li class="toggle-private"><small><span class="fa fa-eye-slash text-muted"></span></small></li>
+      {{else}}
+        <li class="toggle-private"><small><span class="fa fa-eye"></span></small></li>
+      {{/if}}
+      <!-- <li class="edit-deed"><small><span class="fa fa-pencil"></span></small></li> -->
       <li class="remove-deed"><small><span class="fa fa-trash"></span></small></li>
     </ul>
     {{else}}
@@ -318,18 +324,6 @@
             {{>deedItem}}
           {{/each}}
 
-          <li class="list-group-item">
-            <ul class="list-inline pull-right">
-              <li><a href="" class="toggle-private"><small><span class="fa fa-eye-slash"></span></small></a></li>
-              <li><a href="" class="edit-deed"><small><span class="fa fa-pencil"></span></small></a></li>
-              <li><a href="" class="remove-deed"><small><span class="fa fa-trash"></span></small></a></li>
-            </ul>
-            Item 1
-          </li>
-          <li class="list-group-item">
-            <div class="pull-right"><small><span class="fa fa-thumbs-o-up"></span> 10</small></div>
-            Item 2
-          </li>
         </ul>
       {{else}}
         <p>No deeds to show, please add one.</p>

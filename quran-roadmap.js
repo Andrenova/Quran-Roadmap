@@ -170,6 +170,9 @@ if (Meteor.isClient) {
     'click .remove-deed': function () {
       Session.set('currentDeed', this._id);
       $('#remove-deed-modal').modal('show');
+    },
+    'click .toggle-private': function () {
+      Meteor.call('toggleDeedPrivacy', this._id, !this.isPrivate);
     }
   });
 
@@ -380,7 +383,12 @@ if (Meteor.isServer) {
     return Surahs.find();
   });
   Meteor.publish('deeds', function() {
-    return Deeds.find();
+    return Deeds.find({
+      $or: [
+        {isPrivate: {$ne: true}},
+        {userId: this.userId}
+      ]
+    });
   });
   Meteor.publish('reflections', function() {
     return Reflections.find({
@@ -394,12 +402,12 @@ if (Meteor.isServer) {
   Meteor.methods({
     createNewDeed: function (content, surahId) {
       // get current user
-      var currentUserId = Meteor.userId();
+      var currentUserId = Meteor.user();
 
       // insert new deed
       Deeds.insert({
         surahId: surahId,
-        userId: currentUserId,
+        userId: currentUserId._id,
         submitted: new Date(),
         content: content,
         isPrivate: true,
@@ -458,5 +466,14 @@ if (Meteor.isServer) {
     removeDeed: function(deedId) {
       Deeds.remove(deedId);
     },
+    toggleDeedPrivacy: function (deedId, togglePrivacy) {
+      var deed = Deeds.findOne(deedId);
+
+      if (deed.userId !== Meteor.userId()) {
+        throw new Meteor.Error("not-authorized");
+      }
+
+      Deeds.update(deedId, {$set: {isPrivate: togglePrivacy}});
+    }
   });
 }
