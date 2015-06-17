@@ -1,7 +1,6 @@
 // Collections
 Surahs = new Mongo.Collection('surahs');
 Reflections = new Mongo.Collection('reflections');
-
 Deeds = new Mongo.Collection('deeds');
 
 // Router
@@ -9,8 +8,7 @@ Router.configure({
   layoutTemplate: 'layout',
   loadingTemplate: 'loading',
   notFoundTemplate: 'notFound',
-  waitOn: function() { 
-    return [Meteor.subscribe('surahs'), Meteor.subscribe('deeds')]; }
+  waitOn: function() { return Meteor.subscribe('surahs'); }
 });
 
 Router.route('/', { name: 'surahList' });
@@ -24,6 +22,8 @@ if (Meteor.isClient) {
 
   // Subscribe to surahs collection
   Meteor.subscribe('surahs');
+  Meteor.subscribe('deeds')
+  Meteor.subscribe('reflections')
 
   // hook Bootstrap tooltip function
   $(function () {
@@ -54,10 +54,6 @@ if (Meteor.isClient) {
   });
 
   Template.surahPage.helpers({
-    reflections: function () {
-      // ...
-      return Reflections.find();
-    },
     deeds: function() {
       return Deeds.find({surahId: this._id});
     }
@@ -85,6 +81,18 @@ if (Meteor.isClient) {
     }
   });
 
+  Template.reflectionsList.helpers({
+    reflections: function() {
+      return Reflections.find({surahId: this._id});
+    }
+  });
+
+  Template.reflectionItem.helpers({
+    submittedText: function () {
+      return moment(this.submitted).fromNow();
+    }
+  });
+
   // submit a reflection
   Template.reflectionSubmit.events({
     'submit form.new-reflection': function (e, template) {
@@ -94,20 +102,20 @@ if (Meteor.isClient) {
 
       var user = Meteor.user();
       var surah = template.data._id;
-      var reflection = $(e.target).find('[name=reflection-content]').val();
+      var $reflection = $(e.target).find('[name=reflection-content]');
 
       Reflections.insert({
         surahId : surah,
-        body : reflection,
+        body : $reflection.val(),
         userId : user._id,
         author: user.username,
         submitted: new Date()
       });
       
 
-      console.log(user._id + " " + reflection + " " + surah);
+      console.log(user.username + " " + $reflection.val() + " " + template.data.title);
       
-      $(e.target).find('[name=reflection-content]').val("");
+      $reflection.val("");
 
     }
   });
@@ -338,5 +346,8 @@ if (Meteor.isServer) {
   });
   Meteor.publish('deeds', function() {
     return Deeds.find();
+  });
+  Meteor.publish('reflections', function() {
+    return Reflections.find();
   });
 }

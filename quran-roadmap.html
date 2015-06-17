@@ -224,10 +224,8 @@
   <div class="responds row">
     <div class="col-sm-8 reflections">
       <h4>Reflections</h4>
-      <!-- {{>reflectionsList}} -->
-      {{#each reflections}}
-        {{>reflectionItem}}
-      {{/each}}
+
+      {{>reflectionsList}}
 
       <p class="lead text-center text-muted">No reflections to show, please create one.</p>
       <!-- /info no reflections text -->
@@ -311,27 +309,21 @@
 </template>
 
 <!-- reflections list template -->
-<!-- <template name="reflectionsList">
+<template name="reflectionsList">
   {{#each reflections}}
     {{>reflectionItem}}
   {{/each}}
-
-    {{>reflectionItem}}
-  
-</template> -->
+</template>
 
 <!-- reflection item template -->
 <template name="reflectionItem">
   <div class="panel panel-default reflection">
     <div class="panel-body">
-      <h4>Ishlah <small> on 15 June 2015 <span class="label label-success pull-right">Author</span></small></h4>
+      <h4>{{author}} <small>• {{submittedText}} <span class="label label-success pull-right">Author</span></small></h4>
       <hr>
       <div class="reflection-content">
       
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut voluptatibus maxime amet illum officiis veritatis ab aspernatur, quidem, est, dolorum eius dicta itaque! Nisi obcaecati nostrum voluptatum quibusdam ratione eum!</p>
-        <p>Incidunt asperiores voluptatibus eaque non debitis totam sapiente nihil quos aperiam eveniet. Accusamus, quisquam, voluptas? Suscipit sapiente, velit. Minus laborum rem, enim iste dolore odio fuga molestiae delectus vel quisquam.</p>  
-
-        This one using __markdown__.
+        {{body}}
       
       </div>
     </div>
