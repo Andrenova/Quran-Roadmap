@@ -2,12 +2,15 @@
 Surahs = new Mongo.Collection('surahs');
 Reflections = new Mongo.Collection('reflections');
 
+Deeds = new Mongo.Collection('deeds');
+
 // Router
 Router.configure({
   layoutTemplate: 'layout',
   loadingTemplate: 'loading',
   notFoundTemplate: 'notFound',
-  waitOn: function() { return Meteor.subscribe('surahs'); }
+  waitOn: function() { 
+    return [Meteor.subscribe('surahs'), Meteor.subscribe('deeds')]; }
 });
 
 Router.route('/', { name: 'surahList' });
@@ -40,10 +43,45 @@ if (Meteor.isClient) {
     }
   });
 
+  Template.surahItem.helpers({
+    deedsCount: function() {
+      return Deeds.find({surahId: this._id}).count();
+    },
+    // buddiesCount: function() {
+
+    //   return Meteor.users.find({});
+    // }
+  });
+
   Template.surahPage.helpers({
     reflections: function () {
       // ...
       return Reflections.find();
+    },
+    deeds: function() {
+      return Deeds.find({surahId: this._id});
+    }
+  });
+
+  Template.surahPage.events({
+    'submit form.new-deed': function (e) {
+
+      e.preventDefault();
+
+      var $content = $(e.target).find('[name=content]');
+
+      Deeds.insert({
+        surahId: this._id,
+        userId: Meteor.user()._id,
+        submitted: new Date(),
+        content: $content.val(),
+        isPrivate: true
+      });
+
+      console.log(this._id + " " + Meteor.user().username + " " + $content.val());
+
+      $content.val("");
+
     }
   });
 
@@ -81,10 +119,40 @@ if (Meteor.isServer) {
     // code to run on server at startup
 
     if (Surahs.find().count() === 0) {
-      Surahs.insert({
+
+      // fake quran buddies:
+      var saadId = Meteor.users.insert({
+        profile: {name: "Muhamad Saad"}
+      });
+      var saad = Meteor.users.findOne(saadId)
+
+      var medriaId = Meteor.users.insert({
+        profile: {name: "Medria Hardhienata"}
+      });
+      var medria = Meteor.users.findOne(medriaId)
+
+      var firstId = Surahs.insert({
         day: 1,
         title: 'Al Fatiha - Al Baqarah',
         ayah: '1:1 - 2:141'
+      });
+
+      Deeds.insert({
+        surahId: firstId,
+        userId: saad._id,
+        author: saad.profile.name,
+        submitted: new Date(),
+        content: 'Observing prayer deeper',
+        isPrivate: true,
+      });
+
+      Deeds.insert({
+        surahId: firstId,
+        userId: medria._id,
+        author: medria.profile.name,
+        submitted: new Date(),
+        content: 'Go to Mecca for doing Hajj, insyaAllah',
+        isPrivate: false,
       });
 
       Surahs.insert({
@@ -264,8 +332,11 @@ if (Meteor.isServer) {
 
   });
 
-  // Publis surahs
+  // Publish collections
   Meteor.publish('surahs', function() {
     return Surahs.find();
+  });
+  Meteor.publish('deeds', function() {
+    return Deeds.find();
   });
 }
