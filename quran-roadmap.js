@@ -173,6 +173,9 @@ if (Meteor.isClient) {
     },
     'click .toggle-private': function () {
       Meteor.call('toggleDeedPrivacy', this._id, !this.isPrivate);
+    },
+    'click .like-deed': function() {
+      Meteor.call('likeDeed', this._id)
     }
   });
 
@@ -474,6 +477,9 @@ if (Meteor.isServer) {
       }
 
       Deeds.update(deedId, {$set: {isPrivate: togglePrivacy}});
+    },
+    likeDeed: function(deedId) {
+      Deeds.update(deedId, {$inc: {liked: 1}});
     }
   });
 }
