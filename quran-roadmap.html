@@ -361,6 +361,9 @@
       <div class="reflection-content">
       
       {{#if isEditing}}
+        <!-- {{#if isNotOwner}}
+          <small class="text-muted">This reflection is being edited ...</small>
+        {{/if}} -->
         <form class="form edit-reflection-form">
           <div class="form-group">
             <textarea name="edit-reflection" id="edit-reflection" rows="5" class="form-control">{{body}}</textarea>

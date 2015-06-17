@@ -99,6 +99,9 @@ if (Meteor.isClient) {
     isOwner: function() {
       return this.userId === Meteor.userId();
     },
+    // isNotOwner: function() {
+    //   return this.userId === Meteor.userId();
+    // },
     isEditing: function() {
       return this.edited && this.userId === Meteor.userId();
     }
@@ -118,6 +121,10 @@ if (Meteor.isClient) {
     'click .save-reflection': function() {
       var refContent = $("#edit-reflection").val();
       Meteor.call('saveReflection', this._id, refContent);
+    },
+    'click .discard-reflection': function() {
+      var refContent = $("#edit-reflection").val("");
+      Meteor.call('setEditing', this._id, false);
     },
     'click .like': function() {
       Meteor.call('liked', this._id)
