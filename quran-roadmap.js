@@ -98,6 +98,27 @@ if (Meteor.isClient) {
     }
   });
 
+  Template.reflectionItem.events({
+    'click .remove-reflection': function () {
+
+      Session.set('currentReflection', this._id);
+      $('#removeReflection').modal('show');
+      
+      
+    }
+  });
+
+  Template.removeReflection.events({
+    'click .yes-remove': function () {
+      // ...
+      var thisReflection = Session.get('currentReflection');
+      Meteor.call('removeReflection', thisReflection);
+
+      $('#removeReflection').modal('hide');
+
+    }
+  });
+
   // submit a reflection
   Template.reflectionSubmit.events({
     'submit form.new-reflection': function (e, template) {
@@ -349,7 +370,9 @@ if (Meteor.isServer) {
         isPrivate: true,
         liked: 0
       });
-
+    },
+    removeReflection: function(reflection) {
+      Reflections.remove(reflection);
     }
   });
 }
