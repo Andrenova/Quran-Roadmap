@@ -8,3 +8,10 @@ body { background-color: #eee; }
   border: 1px solid #ddd;
   border-radius: 5px;
 }
+.edit-reflection,
+.remove-reflection,
+.save-reflection,
+.discard-reflection,
+.toggle-private,
+.remove-deed,
+.deeds-info { cursor: pointer; }
