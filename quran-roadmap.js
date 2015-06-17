@@ -110,7 +110,7 @@ if (Meteor.isClient) {
   Template.reflectionItem.events({
     'click .remove-reflection': function () {
       Session.set('currentReflection', this._id);
-      $('#removeReflection').modal('show');
+      $('#remove-reflection-modal').modal('show');
     },
     'click .toggle-private': function () {
       Meteor.call('setPrivate', this._id, !this.isPublic);
@@ -137,7 +137,7 @@ if (Meteor.isClient) {
       var thisReflection = Session.get('currentReflection');
       Meteor.call('removeReflection', thisReflection);
 
-      $('#removeReflection').modal('hide');
+      $('#remove-reflection-modal').modal('hide');
 
     }
   });
@@ -156,6 +156,30 @@ if (Meteor.isClient) {
       Meteor.call('createNewReflection', surah, reflection);
       
       $(e.target).find('[name=reflection-content]').val("");
+
+    }
+  });
+
+  Template.deedItem.helpers({
+    isOwner: function() {
+      return this.userId === Meteor.userId();
+    }
+  });
+
+  Template.deedItem.events({
+    'click .remove-deed': function () {
+      Session.set('currentDeed', this._id);
+      $('#remove-deed-modal').modal('show');
+    }
+  });
+
+  Template.removeDeed.events({
+    'click .yes-remove': function () {
+      // ...
+      var thisDeed = Session.get('currentDeed');
+      Meteor.call('removeDeed', thisDeed);
+
+      $('#remove-deed-modal').modal('hide');
 
     }
   });
@@ -430,6 +454,9 @@ if (Meteor.isServer) {
     },
     liked: function(reflectionId) {
       Reflections.update(reflectionId, {$inc: {liked: 1}});
-    }
+    },
+    removeDeed: function(deedId) {
+      Deeds.remove(deedId);
+    },
   });
 }

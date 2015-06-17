@@ -109,6 +109,8 @@
 
     {{>removeReflection}}
 
+    {{>removeDeed}}
+
   </div>
   
   <!-- Google tracking -->
@@ -127,7 +129,7 @@
 
 <template name="removeReflection">
 
-  <div class="modal fade" id="removeReflection">
+  <div class="modal fade" id="remove-reflection-modal">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
         <div class="modal-header">
@@ -136,6 +138,28 @@
         </div>
         <div class="modal-body">
           <p>Are you sure you want to remove this reflection?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger yes-remove">Yes</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
+  
+</template>
+
+<template name="removeDeed">
+
+  <div class="modal fade" id="remove-deed-modal">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Confirmation</h4>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure you want to remove this deed?</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger yes-remove">Yes</button>
@@ -229,6 +253,23 @@
   </div>
 </template>
 
+<!-- deedItem template -->
+<template name="deedItem">
+  <li class="list-group-item">
+    {{#if isOwner}}
+    <ul class="list-inline pull-right">
+      <li class="toggle-private"><small><span class="fa fa-eye"></span></small></li>
+      <li class="edit-deed"><small><span class="fa fa-pencil"></span></small></li>
+      <li class="remove-deed"><small><span class="fa fa-trash"></span></small></li>
+    </ul>
+    {{else}}
+    <div class="pull-right"><small><span class="fa fa-thumbs-o-up text-primary"></span> 10</small></div>
+    {{/if}}
+    {{content}}
+    <span class="clearfix"></span>
+  </li>
+</template>
+
 <!-- singleSurah page template -->
 <template name="surahPage">
 
@@ -264,19 +305,14 @@
         <ul class="list-group">
 
           {{#each deeds}}
-
-          <li class="list-group-item">
-            <div class="pull-right"><small><span class="fa fa-thumbs-o-up"></span> 10</small></div>
-            {{content}}
-          </li>
-
+            {{>deedItem}}
           {{/each}}
 
           <li class="list-group-item">
             <ul class="list-inline pull-right">
-              <li><a href=""><small><span class="fa fa-eye-slash"></span></small></a></li>
-              <li><a href=""><small><span class="fa fa-pencil"></span></small></a></li>
-              <li><a href=""><small><span class="fa fa-trash"></span></small></a></li>
+              <li><a href="" class="toggle-private"><small><span class="fa fa-eye-slash"></span></small></a></li>
+              <li><a href="" class="edit-deed"><small><span class="fa fa-pencil"></span></small></a></li>
+              <li><a href="" class="remove-deed"><small><span class="fa fa-trash"></span></small></a></li>
             </ul>
             Item 1
           </li>
@@ -294,10 +330,10 @@
           <form role="form" class="form new-deed">
             
             <div class="input-group">
-              <span class="input-group-addon">
-                <span class="fa fa-eye-slash text-muted"></span>
+              <input type="text" name="content" class="form-control" aria-label="..." placeholder="Add new deed (private deed)">
+              <span class="input-group-btn">
+                <button type="submit" class="btn btn-primary"><span class="fa fa-plus"></span></button>
               </span>
-              <input type="text" name="content" class="form-control" aria-label="..." placeholder="Add new deed...">
             </div>  
             
           </form>
@@ -346,7 +382,7 @@
       <h4>{{author}} 
         <small>• {{submittedText}}
         {{#if isOwner}}
-          <span class="pull-right toggle-private text-muted">
+          <span class="pull-right toggle-private">
               {{#if isPublic}}
                 <span class="fa fa-eye" title="Make this private"></span>
               {{else}}
