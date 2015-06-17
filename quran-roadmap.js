@@ -47,6 +47,9 @@ if (Meteor.isClient) {
     deedsCount: function() {
       return Deeds.find({surahId: this._id}).count();
     },
+    reflectionsCount: function() {
+      return Reflections.find({surahId: this._id}).count();
+    },
     // buddiesCount: function() {
 
     //   return Meteor.users.find({});
@@ -55,7 +58,13 @@ if (Meteor.isClient) {
 
   Template.surahPage.helpers({
     deeds: function() {
-      return Deeds.find({surahId: this._id});
+      return Deeds.find({surahId: this._id}, {sort: {submitted: -1}});
+    },
+    anyReflections: function() {
+      return Reflections.find({surahId: this._id}).count() > 0 ? true : false;
+    }, 
+    anyDeeds: function() {
+      return Deeds.find({surahId: this._id}).count() > 0 ? true : false;
     }
   });
 
