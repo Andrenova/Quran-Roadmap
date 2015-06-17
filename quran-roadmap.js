@@ -99,9 +99,9 @@ if (Meteor.isClient) {
     isOwner: function() {
       return this.userId === Meteor.userId();
     },
-    // isEditing: function() {
-    //   return 
-    // }
+    isEditing: function() {
+      return this.edited && this.userId === Meteor.userId();
+    }
   });
 
   Template.reflectionItem.events({
@@ -113,7 +113,14 @@ if (Meteor.isClient) {
       Meteor.call('setPrivate', this._id, !this.isPublic);
     },
     'click .edit-reflection': function() {
-      Meteor.call('setEditingOn', this._id, !this.edited);
+      Meteor.call('setEditing', this._id, !this.edited);
+    },
+    'click .save-reflection': function() {
+      var refContent = $("#edit-reflection").val();
+      Meteor.call('saveReflection', this._id, refContent);
+    },
+    'click .like': function() {
+      Meteor.call('liked', this._id)
     }
   });
 
@@ -398,13 +405,24 @@ if (Meteor.isServer) {
 
       Reflections.update(reflectionId, {$set: {isPublic: setToPrivate}});
     },
-    setEditingOn: function(reflectionId, setToEditing) {
+    setEditing: function(reflectionId, setToEditing) {
       var reflection = Reflections.findOne(reflectionId);
       if (reflection.userId !== Meteor.userId()) {
         throw new Meteor.Error("not-authorized");
       }
 
       Reflections.update(reflectionId, {$set: {edited: setToEditing}});
+    },
+    saveReflection: function(reflectionId, newContent) {
+      var reflection = Reflections.findOne(reflectionId);
+      if (reflection.userId !== Meteor.userId()) {
+        throw new Meteor.Error("not-authorized");
+      }
+      Reflections.update(reflectionId, {$set: {body: newContent}});
+      Meteor.call('setEditing', reflectionId, false);
+    },
+    liked: function(reflectionId) {
+      Reflections.update(reflectionId, {$inc: {liked: 1}});
     }
   });
 }

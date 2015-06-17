@@ -360,16 +360,11 @@
       <hr>
       <div class="reflection-content">
       
-      {{#if edited}}
-        <form class="form edit-reflection">
+      {{#if isEditing}}
+        <form class="form edit-reflection-form">
           <div class="form-group">
-            <textarea name="edit-reflection" id="" rows="5" class="form-control">{{body}}</textarea>
+            <textarea name="edit-reflection" id="edit-reflection" rows="5" class="form-control">{{body}}</textarea>
           </div>
-          <div class="form-group pull-right">
-            <button class="btn btn-sm btn-primary save-reflection">Save</button>
-            <button class="btn btn-sm btn-default discard-reflection">Discard Changes</button>
-          </div>
-          <span class="clearfix"></span>
         </form>
       {{else}}
         {{#markdown}}{{body}}{{/markdown}}
@@ -377,15 +372,23 @@
       </div>
     </div>
     <div class="panel-footer">
-      <ul class="list-inline">
+      <ul class="list-inline pull-right">
+
         <!-- <li><span class="fa fa-thumbs-o-up text-primary"></span> You and 9 others like this reflection.</li> -->
-        {{#if isOwner}}
-          <li class="edit-reflection"><span class="fa fa-pencil"></span> Edit</li>
-          <li class="remove-reflection"><span class="fa fa-trash"></span> Remove</li>
+        {{#if isEditing}}
+          <li class="save-reflection"><span class="fa fa-floppy-o"></span> Save</li>
+          <li class="discard-reflection"><span class="fa fa-times"></span> Discard changes</li>
+
         {{else}}
-          <li><span class="fa fa-thumbs-o-up"></span> 10</li>
+           {{#if isOwner}}
+            <li class="edit-reflection"><span class="fa fa-pencil"></span> Edit</li>
+            <li class="remove-reflection"><span class="fa fa-trash"></span> Remove</li>
+          {{else}}
+            <li><span class="fa fa-thumbs-o-up like"></span> {{liked}}</li>
+          {{/if}}
         {{/if}}
       </ul>
+      <span class="clearfix"></span>
     </div>
   </div>
 </template>
