@@ -256,6 +256,16 @@
 <!-- deedItem template -->
 <template name="deedItem">
   <li class="list-group-item">
+    <form class="form edit-deed">
+      <div class="input-group input-group-sm">
+        <input type="text" name="edited-content" class="form-control" aria-label="..." value="{{content}}">
+        <span class="input-group-btn">
+          <button type="submit" class="btn btn-success"><span class="fa fa-floppy-o"></span></button>
+        </span>
+      </div>
+    </form>
+  </li>
+  <li class="list-group-item">
     {{#if isOwner}}
     <ul class="list-inline pull-right">
       <li class="toggle-private"><small><span class="fa fa-eye"></span></small></li>
