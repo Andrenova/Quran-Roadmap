@@ -10,14 +10,23 @@
 <body>
 
   <div class="modals">
-    <div class="modal fade" id="tips">
+    <div class="modal fade" id="deeds-info">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Tips</h4>
+            <h4 class="modal-title">About deeds</h4>
           </div>
           <div class="modal-body">
+            <div class="row">
+              <div class="col-sm-2 text-center text-info"><span class="fa fa-info-circle fa-4x"></span><br><hr></div>
+              <div class="col-sm-8">
+                <p>The Deeds section contains deeds from today's qur'an recitataion portion which you can act upon.</p>
+                <p>These deeds mean to be secret between you and Allah alone. 
+                That's why the default state is <strong>'private'</strong> (depicted by <span class="fa fa-eye-slash"></span>) for each deed. 
+                However, if you really think they will inspire and benefit others. You may change it into public by clicking the eye icon.</p>
+              </div>
+            </div>
             
           </div>
           <div class="modal-footer">
@@ -26,7 +35,7 @@
         </div>
       </div>
     </div>
-    <!-- /#tips -->
+    <!-- /#deeds-info -->
 
     <div class="modal fade" id="about">
       <div class="modal-dialog">
@@ -55,57 +64,6 @@
       </div>
     </div>
     <!-- /#about -->
-
-    <div class="modal fade" id="feedback">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Got any feedbacks?</h4>
-          </div>
-          <form role="form">
-            <div class="modal-body">
-              <p>Feel free to send it to us.</p>
-              
-                
-                <div class="form-group">
-                  <label for="">Email</label>
-                  <input type="email" class="form-control" id="" placeholder="Your email address" required="required">
-                </div>
-
-                <div class="form-group">
-                  <label for="">Content</label>
-                  <textarea name="" id="input" class="form-control" rows="3" required="required">Your feedback please...</textarea>
-                </div>
-              
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-primary" data-dismiss="modal">Send</button>
-              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-    <!-- /#feedback -->
-
-    <div class="modal fade" id="markdown">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title">Markdown references</h4>
-          </div>
-          <div class="modal-body">
-            
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- /#markdown -->
 
     {{>removeReflection}}
 
@@ -186,7 +144,7 @@
     
     <div class="footer">
       <hr>
-      <p class="text-center">Copyleft &copy; <a href="http://twitter.com/nurulishlah/">@nurulishlah</a>, inspired by <a href="http://blog.islamiconlineuniversity.com/quran-road-map-ramadan-2015/">Quran Road Map IOU</a> | <a href="#about" data-toggle="modal">About</a> • <a href="#feedback" data-toggle="modal">Feedback</a> • <a href="https://github.com/Andrenova/Quran-Roadmap" title="Fork on GitH">GitHub</a></p>
+      <p class="text-center">Copyleft &copy; <a href="http://twitter.com/nurulishlah/">@nurulishlah</a>, inspired by <a href="http://blog.islamiconlineuniversity.com/quran-road-map-ramadan-2015/">Quran Road Map IOU</a> | <a href="#about" data-toggle="modal">About</a> • <a href="https://github.com/Andrenova/Quran-Roadmap/issues/new">Feedback</a> • <a href="https://github.com/Andrenova/Quran-Roadmap" title="Fork on GitH">GitHub</a></p>
     </div>
     <!-- /.footer -->
   </div>
@@ -209,13 +167,6 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse navbar-ex1-collapse">
       <ul class="nav navbar-nav navbar-right">
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Notifications</a>
-          <ul class="dropdown-menu" role="menu">
-            <li class="text-muted"><a href="#">No notifications</a></li>
-          </ul>
-        </li>
-        <li><a data-toggle="modal" href="#tips">Tips</a></li>
         {{>loginButtons}}
       </ul>
     </div><!-- /.navbar-collapse -->
@@ -296,10 +247,17 @@
 <template name="surahPage">
 
   {{>surahItem}}
+
+  {{#if currentUser}}
+    <p class="text-center"><small>•</small></p>
+  {{else}}
+    <p class="lead text-center text-muted">Please sign in to submit a reflection or a deed.</p>
+  {{/if}}
   
   <div class="responds row">
     <div class="col-sm-8 reflections">
-      <h4>Reflections <span class="pull-right"><button class="btn btn-default btn-sm">Show mine only</button></span></h4>
+      <!-- <h4>Reflections <span class="pull-right"><button class="btn btn-default btn-sm">Show mine only</button></span></h4> -->
+      <h4>Reflections</h4>
       <span class="clearfix"></span>
       
       <br>
@@ -313,18 +271,16 @@
       <div id="new-reflection">
         {{#if currentUser}}
           {{>reflectionSubmit}}
-        {{else}}  
-          <p class="lead text-center text-muted">Please sign in to submit a reflection.</p>
         {{/if}}
       </div>
       
     </div>
     <!-- /.reflections -->
     <div class="col-sm-4 deeds">
-      <h4>Deeds <small><span class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="Deeds from today's portion which you can act upon. These deeds mean to be secret between you and Allah alone. That's why the default state is 'private' for each deed. However, if you really think they will inspire and benefit others. You may change it into public by clicking the eye icon."></span></small></h4>
+      <h4>Deeds <small><span class="fa fa-info-circle deeds-info" data-toggle="tooltip" data-placement="top" title="click to see info"></span></small></h4>
       
       {{#if anyDeeds}}
-        <ul class="list-group">
+        <ul class="list-group list-deeds">
 
           {{#each deeds}}
             {{>deedItem}}
@@ -347,9 +303,6 @@
             </div>  
             
           </form>
-          <br>
-        {{else}}
-          <p class="lead text-center text-muted">Please sign in to post a new deed.</p>
         {{/if}}
       </div>
 
@@ -367,7 +320,7 @@
   
     <div class="form-group">
       <textarea name="reflection-content" id="input" class="form-control" rows="7" placeholder="Type reflection you might found during reciting this surah..."></textarea>
-      <span id="helpBlock" class="help-block">You can use <a href="#markdown" data-toggle="modal">Markdown syntax</a> to write your reflections.</span>
+      <span id="helpBlock" class="help-block">You can use <a href="https://en.support.wordpress.com/markdown-quick-reference/" target="blank">Markdown syntax</a> to write your reflections.</span>
     </div>
   
     <div class="pull-right">

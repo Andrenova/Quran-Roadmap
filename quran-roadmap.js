@@ -87,6 +87,9 @@ if (Meteor.isClient) {
       // clear the text form field
       $(e.target).find('[name=content]').val("");
 
+    },
+    'click .deeds-info': function () {
+      $('#deeds-info').modal('show');
     }
   });
 
