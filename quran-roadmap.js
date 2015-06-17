@@ -164,7 +164,11 @@ if (Meteor.isClient) {
       
       $(e.target).find('[name=reflection-content]').val("");
 
+    },
+    'click .cancel-submit': function () {
+      $("#input-reflection").val("");
     }
+
   });
 
   Template.deedItem.helpers({
