@@ -318,7 +318,8 @@
               <span class="input-group-btn">
                 <button type="submit" class="btn btn-primary"><span class="fa fa-plus"></span></button>
               </span>
-            </div>  
+            </div>
+            <span class="text-danger">{{errorMessage}}</span> 
             
           </form>
         {{/if}}
@@ -339,6 +340,7 @@
     <div class="form-group">
       <textarea name="reflection-content" id="input-reflection" class="form-control" rows="7" placeholder="Type reflection you might found during reciting this surah..."></textarea>
       <span id="helpBlock" class="help-block">You can use <a href="https://en.support.wordpress.com/markdown-quick-reference/" target="blank">Markdown syntax</a> to write your reflections.</span>
+      <span class="text-danger">{{errorMessage}}</span>
     </div>
   
     <div class="pull-right">

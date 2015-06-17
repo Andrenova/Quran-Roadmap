@@ -69,6 +69,9 @@ if (Meteor.isClient) {
     }, 
     anyDeeds: function() {
       return Deeds.find({surahId: this._id}).count() > 0 ? true : false;
+    },
+    errorMessage: function () {
+      return Session.get('submitDeedError');
     }
   });
 
@@ -77,9 +80,15 @@ if (Meteor.isClient) {
 
       e.preventDefault();
 
+      Session.set('submitDeedError', '');
+
       // get the deed content and surah Id which this deed attach to
       var content = $(e.target).find('[name=content]').val();
       var surahId = this._id;
+
+      if (content === '') {
+        return Session.set('submitDeedError', "Please fill in a deed");
+      }
 
       // create new deed by calling createNewDeed function
       Meteor.call('createNewDeed', content, surahId);
@@ -149,6 +158,12 @@ if (Meteor.isClient) {
     }
   });
 
+  Template.reflectionSubmit.helpers({
+    errorMessage: function () {
+      return Session.get('submitError');
+    }
+  });
+
   // submit a reflection
   Template.reflectionSubmit.events({
     'submit form.new-reflection': function (e, template) {
@@ -156,8 +171,14 @@ if (Meteor.isClient) {
       
       e.preventDefault();
 
+      Session.set('submitError', '');
+
       var surah = template.data._id;
       var reflection = $(e.target).find('[name=reflection-content]').val();
+
+      if(reflection === '') {
+        return Session.set('submitError', "Please fill in reflection.");
+      }
 
       // create new reflection
       Meteor.call('createNewReflection', surah, reflection);
@@ -167,6 +188,7 @@ if (Meteor.isClient) {
     },
     'click .cancel-submit': function () {
       $("#input-reflection").val("");
+      Session.set('submitError', '');
     }
 
   });
@@ -444,8 +466,6 @@ if (Meteor.isServer) {
     createNewReflection: function (surah, reflection) {
       // get current user
       var currentUserId = Meteor.user();
-
-      console.log(currentUserId.username);
 
       // create new reflection
       Reflections.insert({
