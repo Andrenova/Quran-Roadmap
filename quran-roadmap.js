@@ -20,6 +20,10 @@ Router.onBeforeAction('dataNotFound', {only: 'postPage'});
 
 if (Meteor.isClient) {
 
+  
+  Session.set('isInfoRead', false);
+  
+
   // Subscribe to surahs collection
   Meteor.subscribe('surahs');
   Meteor.subscribe('deeds')
@@ -187,6 +191,19 @@ if (Meteor.isClient) {
 
       $('#remove-deed-modal').modal('hide');
 
+    }
+  });
+
+  Template.firstInfo.helpers({
+    isNotRead: function () {
+      // ...
+      return !Session.get('isInfoRead');
+    }
+  });
+
+  Template.firstInfo.events({
+    'click .close': function () {
+      Session.setPersistent('isInfoRead', true);
     }
   });
 }

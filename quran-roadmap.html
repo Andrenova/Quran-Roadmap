@@ -177,12 +177,7 @@
   <div class="container">
     {{>header}}
 
-    <div class="first-alert alert alert-info alert-dismissible" role="alert">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      Welcome to the <strong>Quran Road Map</strong>. This app is based on <strong><a href="http://blog.islamiconlineuniversity.com/quran-road-map-ramadan-2015/">Quran Road Map Article</a></strong>.
-      If you haven't read it yet, we suggest you to do so before using this app.
-    </div>
-    <!-- /.first-alert -->
+    {{>firstInfo}}
     
     <div class="main">
       {{> yield}}
@@ -226,6 +221,17 @@
     </div><!-- /.navbar-collapse -->
   </nav>
   <!-- /.navbar -->
+</template>
+
+<template name="firstInfo">
+  {{#if isNotRead}}
+    <div class="first-alert alert alert-info alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      Welcome to the <strong>Quran Road Map</strong>. This app is based on <strong><a href="http://blog.islamiconlineuniversity.com/quran-road-map-ramadan-2015/">Quran Road Map Article</a></strong>.
+      If you haven't read it yet, we suggest you to do so before using this app.
+    </div>
+    <!-- /.first-alert -->
+  {{/if}}
 </template>
 
 <!-- surahList template -->
