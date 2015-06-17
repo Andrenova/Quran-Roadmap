@@ -98,7 +98,10 @@ if (Meteor.isClient) {
     },
     isOwner: function() {
       return this.userId === Meteor.userId();
-    }
+    },
+    // isEditing: function() {
+    //   return 
+    // }
   });
 
   Template.reflectionItem.events({
@@ -108,6 +111,9 @@ if (Meteor.isClient) {
     },
     'click .toggle-private': function () {
       Meteor.call('setPrivate', this._id, !this.isPublic);
+    },
+    'click .edit-reflection': function() {
+      Meteor.call('setEditingOn', this._id, !this.edited);
     }
   });
 
@@ -376,7 +382,8 @@ if (Meteor.isServer) {
         submitted: new Date(),
         body : reflection,
         isPublic: true,
-        liked: 0
+        liked: 0,
+        edited: false
       });
     },
     removeReflection: function(reflection) {
@@ -390,6 +397,14 @@ if (Meteor.isServer) {
       }
 
       Reflections.update(reflectionId, {$set: {isPublic: setToPrivate}});
+    },
+    setEditingOn: function(reflectionId, setToEditing) {
+      var reflection = Reflections.findOne(reflectionId);
+      if (reflection.userId !== Meteor.userId()) {
+        throw new Meteor.Error("not-authorized");
+      }
+
+      Reflections.update(reflectionId, {$set: {edited: setToEditing}});
     }
   });
 }
