@@ -73,19 +73,15 @@ if (Meteor.isClient) {
 
       e.preventDefault();
 
-      var $content = $(e.target).find('[name=content]');
+      // get the deed content and surah Id which this deed attach to
+      var content = $(e.target).find('[name=content]').val();
+      var surahId = this._id;
 
-      Deeds.insert({
-        surahId: this._id,
-        userId: Meteor.user()._id,
-        submitted: new Date(),
-        content: $content.val(),
-        isPrivate: true
-      });
+      // create new deed by calling addNewDeed function
+      Meteor.call('addNewDeed', content, surahId);
 
-      console.log(this._id + " " + Meteor.user().username + " " + $content.val());
-
-      $content.val("");
+      // clear the text form field
+      $(e.target).find('[name=content]').val("");
 
     }
   });
@@ -358,5 +354,21 @@ if (Meteor.isServer) {
   });
   Meteor.publish('reflections', function() {
     return Reflections.find();
+  });
+
+  Meteor.methods({
+    addNewDeed: function (content, surahId) {
+      // get current user
+      var currentUserId = Meteor.userId();
+
+      // insert new deed
+      Deeds.insert({
+        surahId: surahId,
+        userId: currentUserId,
+        submitted: new Date(),
+        content: content,
+        isPrivate: true
+      });
+    }
   });
 }
